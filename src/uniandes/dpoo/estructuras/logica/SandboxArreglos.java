@@ -1,8 +1,8 @@
 package uniandes.dpoo.estructuras.logica;
 
 import java.util.HashMap;
-
-/**
+// Esto es una prueba del commit
+/** 
  * Esta clase tiene un conjunto de métodos para practicar operaciones sobre arreglos de enteros y de cadenas.
  *
  * Todos los métodos deben operar sobre los atributos arregloEnteros y arregloCadenas.
