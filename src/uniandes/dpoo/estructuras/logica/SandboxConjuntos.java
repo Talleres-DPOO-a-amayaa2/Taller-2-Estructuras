@@ -39,7 +39,7 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoLista( )
     {
-        return null;
+    	return new java.util.ArrayList<String>( arbolCadenas );
     }
 
     /**
@@ -48,7 +48,7 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoListaInvertida( )
     {
-        return null;
+    	return new java.util.ArrayList<String>( arbolCadenas.descendingSet( ) );
     }
 
     /**
@@ -59,7 +59,7 @@ public class SandboxConjuntos
      */
     public String getPrimera( )
     {
-        return null;
+    	return arbolCadenas.isEmpty( ) ? null : arbolCadenas.first( );
     }
 
     /**
@@ -70,7 +70,7 @@ public class SandboxConjuntos
      */
     public String getUltima( )
     {
-        return null;
+    	return arbolCadenas.isEmpty( ) ? null : arbolCadenas.last( );
     }
 
     /**
@@ -80,7 +80,7 @@ public class SandboxConjuntos
      */
     public Collection<String> getSiguientes( String cadena )
     {
-        return null;
+    	return new java.util.ArrayList<String>( arbolCadenas.tailSet( cadena, true ) );
     }
 
     /**
@@ -89,7 +89,7 @@ public class SandboxConjuntos
      */
     public int getCantidadCadenas( )
     {
-        return -1;
+    	return arbolCadenas.size( );
     }
 
     /**
@@ -101,7 +101,7 @@ public class SandboxConjuntos
      */
     public void agregarCadena( String cadena )
     {
-
+    	arbolCadenas.add( cadena );
     }
 
     /**
@@ -110,7 +110,7 @@ public class SandboxConjuntos
      */
     public void eliminarCadena( String cadena )
     {
-
+    	arbolCadenas.remove( cadena );
     }
 
     /**
@@ -119,7 +119,13 @@ public class SandboxConjuntos
      */
     public void eliminarCadenaSinMayusculasOMinusculas( String cadena )
     {
-
+    	String borrar = null;
+        for( String s : arbolCadenas )
+        {
+            if( ( cadena == null && s == null ) || ( cadena != null && s != null && s.equalsIgnoreCase( cadena ) ) )
+            { borrar = s; break; }
+        }
+        if( borrar != null ) arbolCadenas.remove( borrar );
     }
 
     /**
@@ -127,7 +133,7 @@ public class SandboxConjuntos
      */
     public void eliminarPrimera( )
     {
-
+    	if( !arbolCadenas.isEmpty( ) ) arbolCadenas.remove( arbolCadenas.first( ) );
     }
 
     /**
@@ -138,7 +144,9 @@ public class SandboxConjuntos
      */
     public void reiniciarConjuntoCadenas( List<Object> objetos )
     {
-
+    	arbolCadenas.clear( );
+        if( objetos == null ) return;
+        for( Object o : objetos ) arbolCadenas.add( String.valueOf( o ) );
     }
 
     /**
@@ -148,6 +156,9 @@ public class SandboxConjuntos
      */
     public void volverMayusculas( )
     {
+    	java.util.TreeSet<String> nuevo = new java.util.TreeSet<String>( );
+    	for( String s : arbolCadenas ) if( s != null ) nuevo.add( s.toUpperCase( ) );
+    	arbolCadenas = nuevo;
     }
 
     /**
@@ -155,7 +166,9 @@ public class SandboxConjuntos
      */
     public TreeSet<String> invertirCadenas( )
     {
-        return null;
+    	java.util.TreeSet<String> invertido = new java.util.TreeSet<String>( java.util.Collections.reverseOrder( ) );
+        invertido.addAll( arbolCadenas );
+        return invertido;
     }
 
     /**
@@ -165,7 +178,10 @@ public class SandboxConjuntos
      */
     public boolean compararElementos( String[] otroArreglo )
     {
-        return false;
+    	if( otroArreglo == null || otroArreglo.length == 0 ) return true;
+        if( arbolCadenas.isEmpty( ) ) return false;
+        for( String s : otroArreglo ) if( !arbolCadenas.contains( s ) ) return false;
+        return true;
     }
 
 }
